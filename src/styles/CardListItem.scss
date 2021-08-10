@@ -1,0 +1,68 @@
+.card-list-item {
+  border: thin solid darkgrey;
+  border-radius: 0.2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: x-large;
+  flex-basis: 20%;
+  margin: 1em 0;
+  height: 15em;
+  overflow: hidden;
+
+  &:hover {
+    &__image-container {
+      transition: all 1s;
+      transform: scale(1.05);
+    }
+  }
+
+
+  &__image-container {
+    border: thin solid darkgrey;
+    width: 100%;
+    flex-basis: 85%;
+    //background-image: url(http://icdn1.digitaltrends.com/image/google-logo-feature-1030x686.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+
+    &:hover {
+      cursor: pointer;
+      transition: all 1s;
+      transform: scale(1.05);
+
+    }
+
+  }
+
+
+  &__card-image {
+
+  }
+
+  &__info-container {
+    display: flex;
+    justify-content: space-between;
+
+    &__info-element {
+      margin: 0.5em;
+
+      &:hover {
+        cursor: pointer;
+        transition: all 1s;
+        transform: scale(1.05);
+
+      }
+    }
+  }
+
+  &__tags-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: lightgrey;
+  }
+}

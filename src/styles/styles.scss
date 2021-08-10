@@ -1,0 +1,11 @@
+@use "base";
+@use 'FiltersBar';
+@use 'CardListItem';
+@use 'CardsList';
+@use 'CardDetails';
+
+
+html {
+  background-color: lightgrey;
+  font-family: 'Open Sans', sans-serif;
+}
