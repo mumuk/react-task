@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoadingPage from "./components/LoadingPage"
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import {CardsList} from "./components/CardsList"
+import {Provider} from "react-redux"
+import {store} from "./store/configureStore"
+import AppRouter from "./routers/AppRouter";
 
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
 
-
-
-console.log('MIKE')
-ReactDOM.render(<CardsList/>, document.getElementById('app'));
+ReactDOM.render(jsx, document.getElementById('app'));

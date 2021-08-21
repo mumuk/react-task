@@ -1,46 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import {CardListItem} from "./CardListItem"
 import {FiltersBar} from "./FiltersBar";
-import {dataArray} from "../dataArray"
-
-const axios = require('axios')
-
-const API_KEY = '22812851-e72d4d1e56b860749e3829011';
-const URL = `https://pixabay.com/api/?key=${API_KEY}&q=cats&image_type=all&per_page=100`;
-
-const sendGetRequest = async (url) => {
-  try {
-    const resp = await axios.get(url);
-
-  } catch (err) {
-    console.error(err);
-  }
-}
+import {LoadingPage} from "./LoadingPage"
+// import {useSelector, useDispatch} from "react-redux";
+import {fetchData} from "../actions/reposActions";
+import {useDispatch, useSelector} from "react-redux"
+import {CardListItem} from "./CardListItem"
 
 
 export const CardsList = () => {
-  const [data, dataSet] = useState(null)
+  const dispatch = useDispatch()
+  const {isFetching, items} = useSelector(state => state.repos)
+  const {text, sortBy} = useSelector(state => state.filters)
+  const [inputText, setInputText] = useState(text)
+  const [arrItems, setArrItems] = useState(items)
+
+  useEffect(() => {
+    dispatch(fetchData())
+  }, [dispatch])
+
 
   useEffect(() => {
 
-  })
+    const filtered = items.filter((item) =>
+      item.tags.toLowerCase().includes(text.toLowerCase())
+    ).sort((a, b) => {
+      if (sortBy === 'comments') {
+        if (a.comments > b.comments) {
+          return -1
+        }
+      }
+      if (sortBy === 'likes') {
+        if (a.likes > b.likes) {
+          return -1
+        }
+      }
+    })
 
 
-  return (<div className="cards-list-page">
-      <div>
+    setArrItems(filtered)
+  }, [text, sortBy, items])
+
+
+  return (
+    isFetching ? <LoadingPage/> :
+      <div className="cards-list-page">
+
         <FiltersBar/>
-      </div>
-      <div className="cards-list-page__list">
-         {dataArray.map((el) => {
 
-          return <CardListItem
+        <div className="cards-list-page__list">
+          {arrItems.map((el) => <CardListItem
             key={el.id}
-            element={el}
-          />
-        })}
+            element={el}/>
+          )}
+        </div>
       </div>
-    </div>
-
-
   )
 }

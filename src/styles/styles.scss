@@ -3,9 +3,11 @@
 @use 'CardListItem';
 @use 'CardsList';
 @use 'CardDetails';
+@use 'LoadingPage';
+@use 'PageNotFound';
+
 
 
 html {
-  background-color: lightgrey;
   font-family: 'Open Sans', sans-serif;
 }

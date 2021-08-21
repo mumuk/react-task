@@ -20,14 +20,18 @@
 
 
   &__image-container {
+    flex-shrink: 0;
     border: thin solid darkgrey;
+    height: 70%;
     width: 100%;
-    flex-basis: 85%;
+    //flex-basis: 85%;
     //background-image: url(http://icdn1.digitaltrends.com/image/google-logo-feature-1030x686.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: inline-block;
+    //width: 10em;
+
 
     &:hover {
       cursor: pointer;
@@ -40,15 +44,18 @@
 
 
   &__card-image {
-
+    display: none;
   }
 
   &__info-container {
     display: flex;
     justify-content: space-between;
 
+
     &__info-element {
+      display: block;
       margin: 0.5em;
+      font-size: 75%;
 
       &:hover {
         cursor: pointer;
@@ -63,6 +70,10 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    background-color: lightgrey;
+font-size: 80%;
+  }
+
+  &__image-tag{
+
   }
 }

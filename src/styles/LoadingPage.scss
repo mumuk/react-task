@@ -1,0 +1,11 @@
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+
+
+  &__image{
+    width: 10em;
+    height: 10em;
+  }
+}

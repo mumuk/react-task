@@ -1,0 +1,8 @@
+.container{
+display: flex;
+  &__inage{
+    width: auto;
+    height: auto;
+    background-image: url("/images/404-Error.png");
+  }
+}

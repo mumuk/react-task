@@ -7,14 +7,20 @@ module.exports = {
   entry: './src/app.js', //Относительный путь для точки входа
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    sourceMapFilename: "[name].js.map"
   },
-  module: {
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+    module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use:{
+          loader: 'babel-loader',
+        }
       },
       {
         test: /\.s?css$/,
@@ -36,6 +42,7 @@ module.exports = {
       },
     ]
   },
+  devtool: "eval-cheap-source-map",
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true,
