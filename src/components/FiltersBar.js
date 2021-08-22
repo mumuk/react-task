@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Select from 'react-select'
 import {useDispatch, useSelector} from "react-redux"
 import {setTagsFilter, sortByComments, sortByLikes} from "../actions/filtersActions";
-import {DebounceInput} from 'react-debounce-input';
+import {DebounceInput} from "react-debounce-input"
 
 export const FiltersBar = () => {
   const dispatch = useDispatch()
@@ -12,7 +12,6 @@ export const FiltersBar = () => {
   const [arrItems, setArrItems] = useState(items)
 
 
-
   const options = [
     {value: {sortBy: 'comments'}, label: 'by comments'},
     {value: {sortBy: 'likes'}, label: 'by likes'},
@@ -20,12 +19,9 @@ export const FiltersBar = () => {
 
 
   const onTextChange = (e) => {
+    console.log('from keyup', e.target.value)
 
-
-    setInputText(e.target.value)
-    console.log(inputText[inputText.length - 1])
-    console.log(inputText[inputText.length - 1]!== e.target.value)
-    inputText[inputText.length - 1] !== e.target.value && dispatch(setTagsFilter(inputText));
+    dispatch(setTagsFilter(e.target.value));
   };
 
   const onSortChange = ({value}) => {
@@ -43,10 +39,22 @@ export const FiltersBar = () => {
         placeholder="search by tags"
         className="filters-bar__item"
         value={inputText}
-        debounceTimeout={300}
-        onChange={onTextChange}
+        debounceTimeout={300} //не работает на onKeyUp, только onChange
+        // onChange={onTextChange}
+        onChange={(e) => {setInputText(e.target.value)}}
+        onKeyUp={onTextChange}
       />
 
+      {/*<DebounceInput*/}
+      {/*  type="text"*/}
+      {/*  placeholder="search by tags"*/}
+      {/*  className="filters-bar__item"*/}
+      {/*  value={inputText}*/}
+      {/*  debounceTimeout={300}*/}
+      {/*  onChange={onTextChange}*/}
+      {/*  // onChange={(e) => {setInputText(e.target.value)}}*/}
+      {/*  // onKeyUp={onTextChange}*/}
+      {/*/>*/}
       <Select className="filters-bar__item"
               value={sortBy}
               onChange={onSortChange}

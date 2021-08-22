@@ -3,7 +3,7 @@ import {ImageTag} from "./ImageTag";
 import {Link} from "react-router-dom"
 import {useDispatch} from "react-redux"
 import {getCurrent} from "../actions/reposActions";
-const axios = require('axios')
+
 
 
 
