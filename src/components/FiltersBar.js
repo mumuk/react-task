@@ -45,16 +45,16 @@ export const FiltersBar = () => {
         onKeyUp={onTextChange}
       />
 
-      {/*<DebounceInput*/}
-      {/*  type="text"*/}
-      {/*  placeholder="search by tags"*/}
-      {/*  className="filters-bar__item"*/}
-      {/*  value={inputText}*/}
-      {/*  debounceTimeout={300}*/}
-      {/*  onChange={onTextChange}*/}
-      {/*  // onChange={(e) => {setInputText(e.target.value)}}*/}
-      {/*  // onKeyUp={onTextChange}*/}
-      {/*/>*/}
+      <input
+        type="text"
+        placeholder="search by tags"
+        className="filters-bar__item"
+        value={inputText}
+        debounceTimeout={300}
+        onChange={onTextChange}
+        // onChange={(e) => {setInputText(e.target.value)}}
+        // onKeyUp={onTextChange}
+      />
       <Select className="filters-bar__item"
               value={sortBy}
               onChange={onSortChange}
