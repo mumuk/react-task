@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom"
-import {dataArray} from "../dataArray"
+import {useSelector} from "react-redux"
+
 
 export const CardDetails = (props) => {
-  const [element, setElement] = useState({})
-
+  const {currentItem} = useSelector(state => state.repos)
 
   const {
     id,
@@ -23,17 +23,9 @@ export const CardDetails = (props) => {
     likes,
     comments,
     tags
-  } = element
-  useEffect(() => {
-
-    const el = dataArray.find((element => {
-      return element.id.toString() === props.match.params.id
-    }))
+  } = currentItem
 
 
-    setElement(el)
-    console.log(el)
-  })
 
   return (
     <div className="card-details">
