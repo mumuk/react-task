@@ -18,26 +18,26 @@ export const CardsList = () => {
     dispatch(fetchData())
   }, [dispatch])
 
+  const filteredItems = items.filter((item) =>
+    item.tags.toLowerCase().includes(text.toLowerCase())
+  ).sort((a, b) => {
+    if (sortBy === 'comments') {
+      if (a.comments > b.comments) {
+        return -1
+      }
+    }
+    if (sortBy === 'likes') {
+      if (a.likes > b.likes) {
+        return -1
+      }
+    }
+  })
+
 
   useEffect(() => {
 
-    const filtered = items.filter((item) =>
-      item.tags.toLowerCase().includes(text.toLowerCase())
-    ).sort((a, b) => {
-      if (sortBy === 'comments') {
-        if (a.comments > b.comments) {
-          return -1
-        }
-      }
-      if (sortBy === 'likes') {
-        if (a.likes > b.likes) {
-          return -1
-        }
-      }
-    })
+    setArrItems(filteredItems)
 
-
-    setArrItems(filtered)
   }, [text, sortBy, items])
 
 

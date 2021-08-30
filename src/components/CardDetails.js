@@ -4,9 +4,7 @@ import {dataArray} from "../dataArray"
 
 export const CardDetails = (props) => {
   const [element, setElement] = useState({})
-// const element =useSelector(state=>state.element)
-// console.log(element)
-  // console.log(element)
+
 
   const {
     id,
