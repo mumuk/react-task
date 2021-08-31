@@ -1,4 +1,4 @@
-import {FETCH_DATA, FETCH_DATA_FAIL, GET_CURRENT_ITEM, SET_CURRENT_ITEM} from "../store/types"
+import {FETCH_DATA, FETCH_DATA_FAIL, GET_CURRENT_ITEM, CHANGE_CURRENT_ITEM} from "../store/types"
 import axios from "axios"
 
 const API_KEY = '22812851-e72d4d1e56b860749e3829011';
@@ -24,6 +24,6 @@ export const fetchData = () => async (dispatch) => {
 }
 
 export const getCurrent=(payload)=>({type:GET_CURRENT_ITEM,payload})
-export const setCurrent=(payload)=>({type:SET_CURRENT_ITEM,payload})
+export const changeCurrent=(payload)=>({type:CHANGE_CURRENT_ITEM,payload})
 
 

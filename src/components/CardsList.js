@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FiltersBar} from "./FiltersBar";
 import {LoadingPage} from "./LoadingPage"
-// import {useSelector, useDispatch} from "react-redux";
 import {fetchData} from "../actions/reposActions";
 import {useDispatch, useSelector} from "react-redux"
 import {CardListItem} from "./CardListItem"
@@ -13,9 +12,15 @@ export const CardsList = () => {
   const {text, sortBy} = useSelector(state => state.filters)
   const [arrItems, setArrItems] = useState(items)
 
+
   useEffect(() => {
-    dispatch(fetchData())
-  }, [dispatch])
+    items.length === 0 && dispatch(fetchData())
+  }, [])
+
+  useEffect(() => {
+    setArrItems(filteredItems)
+  }, [text, sortBy, items])
+
 
   const filteredItems = items.filter((item) =>
     item.tags.toLowerCase().includes(text.toLowerCase())
@@ -33,29 +38,17 @@ export const CardsList = () => {
   })
 
 
-  useEffect(() => {
-
-    setArrItems(filteredItems)
-
-  }, [text, sortBy, items])
-
-
   return (
-    isFetching ? <LoadingPage/> :
-      <div className="cards-list-page">
-
-        <FiltersBar/>
-
-        <div className="cards-list-page__list">
-          {arrItems.map((el) => {
-              // console.log('element with id:', el.id)
-              console.log('rendering all components!')
-              return <CardListItem
-                key={el.id}
-                element={el}/>
-            }
-          )}
-        </div>
+    isFetching ? <LoadingPage/> : <div className="cards-list-page">
+      <FiltersBar/>
+      <div className="cards-list-page__list">
+        {arrItems.map((el) => {
+            return <CardListItem
+              key={el.id}
+              element={el}/>
+          }
+        )}
       </div>
+    </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import {ImageTag} from "./ImageTag";
 import {Link} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
@@ -7,6 +7,7 @@ import ImageTagsEditForm from "./ImageTagsEditForm";
 
 
 export const CardListItem = (props) => {
+  console.log('CardList item')
   const [formVisible, setFormVisible] = useState(false)
   const dispatch = useDispatch()
   let {comments, likes, previewURL, tags, id} = props.element
@@ -18,9 +19,9 @@ export const CardListItem = (props) => {
      dispatch(getCurrent(props.element))
   }
 
+
+
   const toggleFormVisible = (visible) => setFormVisible(visible)
-
-
 
 
   function handleClick() {

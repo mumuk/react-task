@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import onClickOutside from "react-onclickoutside";
 import {Field, FieldArray, Form, Formik} from 'formik';
-import {getCurrent, setCurrent} from "../actions/reposActions"
+import {changeCurrent} from "../actions/reposActions"
 
 export const ImageTagsEditForm = (props) => {
   const dispatch = useDispatch()
@@ -10,20 +10,17 @@ export const ImageTagsEditForm = (props) => {
   const [tags, setTags] = useState(currentItem.tags.split(', '))
 
 
-
   useEffect(() => {
-    props.toggleFormVisible(!props.formVisible)
-
-    dispatch(setCurrent({...currentItem, tags: tags.join(', ')}))
-
+    dispatch(changeCurrent({...currentItem, tags: tags.join(', ')}))
   }, [tags]);
+
+
+  const handleSubmit = () => {
+
+  }
 
   ImageTagsEditForm.handleClickOutside = () => {
     props.toggleFormVisible()
-  }
-
-  const handleClickOutside = () => {
-    console.log('onClickOutside() method called')
   }
 
 
@@ -31,12 +28,10 @@ export const ImageTagsEditForm = (props) => {
     <div>
       <Formik
         initialValues={{tags}}
-
         onSubmit={values => {
           setTags(values.tags)
-
+          handleSubmit()
         }
-
         }
         render={({values}) => (
           <Form
