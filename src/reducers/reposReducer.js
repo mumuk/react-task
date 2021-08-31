@@ -1,35 +1,36 @@
 const axios = require('axios')
-import {FETCH_DATA,FETCH_DATA_FAIL, CURRENT_ITEM} from "../store/types";
+import {FETCH_DATA, FETCH_DATA_FAIL, GET_CURRENT_ITEM, SET_CURRENT_ITEM} from "../store/types";
 
 
 const reposDefaultState = {
   items: [],
-  currentItem:{},
+  currentItem: {},
   isFetching: true,
 }
 
 export default (state = reposDefaultState, action) => {
-
+// console.log(action.payload)
   switch (action.type) {
     case FETCH_DATA:
       return {
         ...state,
-        items:action.payload,
+        items: action.payload,
         isFetching: false
       }
-    case CURRENT_ITEM:
-    return{
-      ...state,
-      currentItem: action.payload
-    }
-
+    case GET_CURRENT_ITEM:
+      return {
+        ...state,
+        currentItem: action.payload
+      }
+    case SET_CURRENT_ITEM:
+      return {
+        ...state,
+        items: state.items.filter(item=>{return item.id!==action.payload.id}).concat(action.payload)
+      }
     default:
       return state
   }
 }
-
-
-
 
 
 export const startFetchData = () => {

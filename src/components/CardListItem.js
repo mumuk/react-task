@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ImageTag} from "./ImageTag";
 import {Link} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {getCurrent} from "../actions/reposActions";
 import ImageTagsEditForm from "./ImageTagsEditForm";
 
@@ -11,18 +11,16 @@ export const CardListItem = (props) => {
   const dispatch = useDispatch()
   let {comments, likes, previewURL, tags, id} = props.element
   tags = tags.split(',')
+  const {currentItem} = useSelector(state => state.repos)
 
   const editTagsHandler = (e) => {
     toggleFormVisible(true)
-    dispatch(getCurrent(props.element))
+     dispatch(getCurrent(props.element))
   }
 
-const toggleFormVisible = (visible)=>setFormVisible(visible)
+  const toggleFormVisible = (visible) => setFormVisible(visible)
 
 
-  //TODO что нужно чтобы именить стор?
-  //TODO Как аменить тег?
-  //TODO теги записываются в редакс?
 
 
   function handleClick() {
@@ -58,7 +56,7 @@ const toggleFormVisible = (visible)=>setFormVisible(visible)
         })}
 
       </div>
-      {formVisible && <ImageTagsEditForm toggleFormVisible = {toggleFormVisible}/>}
+      {formVisible && <ImageTagsEditForm toggleFormVisible={toggleFormVisible}/>}
     </div>
 
   )

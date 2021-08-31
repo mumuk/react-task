@@ -1,69 +1,87 @@
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import onClickOutside from "react-onclickoutside";
-
+import {Field, FieldArray, Form, Formik} from 'formik';
+import {getCurrent, setCurrent} from "../actions/reposActions"
 
 export const ImageTagsEditForm = (props) => {
   const dispatch = useDispatch()
-  const {items, currentItem} = useSelector(state => state.repos)
+  const {currentItem} = useSelector(state => state.repos)
   const [tags, setTags] = useState(currentItem.tags.split(', '))
-  const [newTags, setNewTags] = useState(tags)
+
+
 
   useEffect(() => {
     props.toggleFormVisible(!props.formVisible)
-  }, []);
+
+    dispatch(setCurrent({...currentItem, tags: tags.join(', ')}))
+
+  }, [tags]);
 
   ImageTagsEditForm.handleClickOutside = () => {
     props.toggleFormVisible()
   }
-
-
-
-
-  useEffect(() => {
-
-  }, [])
-
 
   const handleClickOutside = () => {
     console.log('onClickOutside() method called')
   }
 
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    console.log('handle submit - tags: ', currentItem.tags)
-  }
-
-  function onTagChange(e) {
-     const tag = e.target.value
-    console.log(tag)
-    setTags([tag])
-    console.log('new tags', tags)
-  }
-
-
-  const tagsInputsList = tags.map((tag, index) => {
-
-    return <input
-      id={`tag${index}`}
-      defaultValue={tag}
-      key={tags[index]}
-      onChange={onTagChange}
-    />
-  })
-
-
   return (
-    <form className={'tag-edit-form'}
-          onSubmit={handleSubmit}>
-      {tagsInputsList}
-      <button>save</button>
-    </form>
+    <div>
+      <Formik
+        initialValues={{tags}}
+
+        onSubmit={values => {
+          setTags(values.tags)
+
+        }
+
+        }
+        render={({values}) => (
+          <Form
+            className={'tag-edit-form'}
+          >
+            <FieldArray
+              name="tags"
+              render={arrayHelpers => (
+                <div>
+                  {values.tags && values.tags.length > 0 ? (
+                    values.tags.map((tag, index) => (
+                      <div key={index}>
+                        <Field name={`tags.${index}`}/>
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                        >
+                          -
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+                        >
+                          +
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <button type="button" onClick={() => arrayHelpers.push('')}>
+                      {/* show this when user has removed all friends from the list */}
+                      Add a tag
+                    </button>
+                  )}
+                  <div>
+                    <button type="submit">Submit</button>
+                  </div>
+                </div>
+              )}
+            />
+          </Form>
+        )}
+      />
+    </div>
   )
 }
-
 
 const clickOutsideConfig = {
   handleClickOutside: () => ImageTagsEditForm.handleClickOutside

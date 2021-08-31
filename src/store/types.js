@@ -1,6 +1,7 @@
 export const FETCH_DATA = "FETCH_DATA"
 export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL"
-export const CURRENT_ITEM = "CURRENT_ITEM"
+export const GET_CURRENT_ITEM = "GET_CURRENT_ITEM"
+export const SET_CURRENT_ITEM = "SET_CURRENT_ITEM"
 
 export const EDIT_DATA = "EDIT_DATA"
 

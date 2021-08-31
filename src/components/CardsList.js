@@ -11,7 +11,6 @@ export const CardsList = () => {
   const dispatch = useDispatch()
   const {isFetching, items} = useSelector(state => state.repos)
   const {text, sortBy} = useSelector(state => state.filters)
-  const [inputText, setInputText] = useState(text)
   const [arrItems, setArrItems] = useState(items)
 
   useEffect(() => {
@@ -48,9 +47,13 @@ export const CardsList = () => {
         <FiltersBar/>
 
         <div className="cards-list-page__list">
-          {arrItems.map((el) => <CardListItem
-            key={el.id}
-            element={el}/>
+          {arrItems.map((el) => {
+              // console.log('element with id:', el.id)
+              console.log('rendering all components!')
+              return <CardListItem
+                key={el.id}
+                element={el}/>
+            }
           )}
         </div>
       </div>
