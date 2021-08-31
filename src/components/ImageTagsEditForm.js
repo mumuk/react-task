@@ -15,10 +15,6 @@ export const ImageTagsEditForm = (props) => {
   }, [tags]);
 
 
-  const handleSubmit = () => {
-
-  }
-
   ImageTagsEditForm.handleClickOutside = () => {
     props.toggleFormVisible()
   }
@@ -30,7 +26,6 @@ export const ImageTagsEditForm = (props) => {
         initialValues={{tags}}
         onSubmit={values => {
           setTags(values.tags)
-          handleSubmit()
         }
         }
         render={({values}) => (
@@ -47,13 +42,13 @@ export const ImageTagsEditForm = (props) => {
                         <Field name={`tags.${index}`}/>
                         <button
                           type="button"
-                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                          onClick={() => arrayHelpers.remove(index)}
                         >
                           -
                         </button>
                         <button
                           type="button"
-                          onClick={() => arrayHelpers.insert(index, '')} // insert an empty string at a position
+                          onClick={() => arrayHelpers.insert(index, '')}
                         >
                           +
                         </button>
@@ -61,7 +56,7 @@ export const ImageTagsEditForm = (props) => {
                     ))
                   ) : (
                     <button type="button" onClick={() => arrayHelpers.push('')}>
-                      {/* show this when user has removed all friends from the list */}
+
                       Add a tag
                     </button>
                   )}

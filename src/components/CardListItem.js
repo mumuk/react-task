@@ -14,12 +14,13 @@ export const CardListItem = (props) => {
   tags = tags.split(',')
   const {currentItem} = useSelector(state => state.repos)
 
-  const editTagsHandler = (e) => {
+  const editTagsHandler = () => {
     toggleFormVisible(true)
-     dispatch(getCurrent(props.element))
+      dispatch(getCurrent(props.element))
   }
-
-
+//
+// useEffect(()=>{},[])
+// useEffect(()=>{},[])
 
   const toggleFormVisible = (visible) => setFormVisible(visible)
 
@@ -63,3 +64,4 @@ export const CardListItem = (props) => {
   )
 }
 
+export default React.memo(CardListItem)

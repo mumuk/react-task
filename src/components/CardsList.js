@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import {FiltersBar} from "./FiltersBar";
 import {LoadingPage} from "./LoadingPage"
 import {fetchData} from "../actions/reposActions";
 import {useDispatch, useSelector} from "react-redux"
-import {CardListItem} from "./CardListItem"
+import CardListItem from "./CardListItem"
 
 
 export const CardsList = () => {
@@ -12,10 +12,9 @@ export const CardsList = () => {
   const {text, sortBy} = useSelector(state => state.filters)
   const [arrItems, setArrItems] = useState(items)
 
-
-  useEffect(() => {
-    items.length === 0 && dispatch(fetchData())
-  }, [])
+useMemo(() => {
+  items.length === 0 && dispatch(fetchData())
+}, [items]);
 
   useEffect(() => {
     setArrItems(filteredItems)
